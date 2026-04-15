@@ -4,7 +4,7 @@ import { createContext, useState } from "react";
 const GlobalContext = createContext()
 
 const GlobalProvider = ({ children }) => {
-    const [showResults, setShowResults] = useState(false)
+    const [showResults, setShowResults] = useState(false);
 
     const value = {
         showResults,
