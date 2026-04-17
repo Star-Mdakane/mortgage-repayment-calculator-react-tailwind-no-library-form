@@ -10,6 +10,7 @@ const GlobalProvider = ({ children }) => {
     const [showResults, setShowResults] = useState(false);
     const [formValues, setFormValues] = useState(initialValue);
     const [formErrors, setFormErrors] = useState({});
+    const [results, setResults] = useState(null);
 
     const handleFormInput = (e) => {
         const { name, value, type, checked } = e.target;
@@ -36,12 +37,14 @@ const GlobalProvider = ({ children }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const errors = validate(formValues)
-        setFormErrors(errors)
+        const errors = validate(formValues);
+        setFormErrors(errors);
 
-        const noErrors = Object.keys(errors).length === 0;
-        if (noErrors) {
-            calculateMortgage(formValues);
+
+
+        if (Object.keys(errors).length == 0) {
+            const res = calculateMortgage(formValues);
+            setResults(res);
             setShowResults(true);
         } else {
             setShowResults(false);
@@ -54,7 +57,37 @@ const GlobalProvider = ({ children }) => {
         const rate = Number(values.rate) / 100 / 12;
         const months = Number(values.term) * 12;
 
-        console.log({ amount, term, rate, months });
+        if (!amount || !term || !rate) {
+            return { monthly: 0, total: 0 };
+        }
+
+        if (values.type === 'repayment') {
+            const pow = Math.pow(1 + rate, months);
+            const monthlyRepayment = amount * (rate * pow) / (pow - 1);
+            const mortgage = monthlyRepayment * months;
+
+            return {
+                type: 'repayment',
+                monthly: Number(monthlyRepayment.toFixed(2)),
+                total: Number(mortgage.toFixed(2))
+            };
+        }
+
+        if (values.type === 'interestOnly') {
+            const monthlyInterestOnly = amount * rate;
+            const totalInterestOnly = monthlyInterestOnly * months;
+            const interestOnlyMortgage = totalInterestOnly + amount;
+
+            return {
+                type: 'interestOnly',
+                monthly: Number(monthlyInterestOnly.toFixed(2)),
+                total: Number(interestOnlyMortgage.toFixed(2))
+            };
+        }
+
+        return { monthly: 0, total: 0 };
+
+
     }
 
     const value = {
@@ -65,7 +98,8 @@ const GlobalProvider = ({ children }) => {
         handleSubmit,
         handleFormInput,
         initialValue,
-        setFormValues
+        setFormValues,
+        results
 
     }
 
