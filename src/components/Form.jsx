@@ -4,13 +4,19 @@ import { GlobalContext } from "../contexts/GlobalContext"
 
 const Form = () => {
 
-    const { formValues, setFormValues, handleFormInput, initialValue, handleSubmit, formErrors } = useContext(GlobalContext);
+    const { formValues, setFormValues, handleFormInput, initialValue, handleSubmit, formErrors, setShowResults } = useContext(GlobalContext);
+
+    const onClickHandler = () => {
+        setShowResults(false);
+        setFormValues(initialValue);
+    }
+
 
     return (
         <form id="form" onSubmit={handleSubmit} className='w-full lg:w-126 py-8 px-6 md:p-10 flex flex-col gap-6 md:gap-10'>
             <div className='flex flex-col md:flex-row gap-2 md:justify-between'>
                 <h1 className='text-[24px] leading-[125%] tracking-[0%] text-slate-900 font-bold'>Mortgage Calculator</h1>
-                <button type="button" onClick={() => setFormValues(initialValue)} className='text-[16px] text-[#4E6E7E] text-left leading-[150%] tracking-[0%] font-medium underline cursor-pointer'>Clear All</button>
+                <button type="button" onClick={onClickHandler} className='text-[16px] text-[#4E6E7E] text-left leading-[150%] tracking-[0%] font-medium underline cursor-pointer'>Clear All</button>
             </div>
             <div className='grid md:grid-cols-2 gap-6'>
                 <div className='col-span-2 flex flex-col gap-3'>

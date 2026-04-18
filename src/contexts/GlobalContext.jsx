@@ -40,8 +40,6 @@ const GlobalProvider = ({ children }) => {
         const errors = validate(formValues);
         setFormErrors(errors);
 
-
-
         if (Object.keys(errors).length == 0) {
             const res = calculateMortgage(formValues);
             setResults(res);
@@ -81,7 +79,8 @@ const GlobalProvider = ({ children }) => {
             return {
                 type: 'interestOnly',
                 monthly: Number(monthlyInterestOnly.toFixed(2)),
-                total: Number(interestOnlyMortgage.toFixed(2))
+                total: Number(totalInterestOnly.toFixed(2)),
+                totalInterest: Number(interestOnlyMortgage.toFixed(2))
             };
         }
 

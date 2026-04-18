@@ -4,9 +4,11 @@ import { GlobalContext } from '../contexts/GlobalContext';
 
 const PaymentResults = () => {
 
-    const { results } = useContext(GlobalContext);
+    const { results, formValues } = useContext(GlobalContext);
 
-    const { monthly, total } = results;
+    const { monthly, total, totalInterest } = results;
+
+    console.log(formValues.type);
 
     return (
         <div className='flex flex-col gap-6 md:gap-10'>
@@ -25,8 +27,18 @@ const PaymentResults = () => {
                         Total you'll repay over the term
                     </p>
                     <p className='text-[24px] text-white leading-[125%] tracking-[0%] font-bold'>
-                        £{total}
+                        £{total.toFixed(2)}
                     </p>
+                    {formValues.type === 'interestOnly' && (
+                        <>
+                            <p className='text-[16px] leading-[150%] font-medium text-[#9ABED5]'>
+                                Total you'll repay (Including principle amount)
+                            </p>
+                            <p className='text-[24px] text-white leading-[125%] tracking-[0%] font-bold'>
+                                £{totalInterest?.toFixed(2)}
+                            </p>
+                        </>
+                    )}
                 </div>
             </div>
         </div>
