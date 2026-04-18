@@ -53,7 +53,9 @@ const Form = () => {
                             pattern="[0-9]*[.]?[0-9]*"
                             max={20}
                             name="rate"
-                            value={(e) => {
+                            value={formValues.rate}
+                            id="rate"
+                            onChange={(e) => {
                                 let val = e.target.value.replace(',', '.').replace(/[^0-9.]/g, '');
 
                                 const parts = val.split('.');
@@ -62,10 +64,7 @@ const Form = () => {
                                 }
 
                                 setFormValues(prev => ({ ...prev, rate: val }));
-                            }
-                            }
-                            id="rate"
-                            onChange={handleFormInput}
+                            }}
                             className='w-full px-4 text-[18px] leading-[125%] tracking-[0%] text-slate-900 font-bold placeholder-slate-900 appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none cursor-pointer' />
                         <p className={`w-12.5 px-4 py-3 text-[18px] leading-[125%] tracking-[0%] font-bold ${formErrors.amount ? 'text-white' : 'text-[#4E6E7E]'} ${formErrors.amount ? 'bg-[#D73328]' : 'bg-[#E4F4FD]'}`}>%</p>
                     </div>
