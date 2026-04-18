@@ -53,7 +53,17 @@ const Form = () => {
                             pattern="[0-9]*[.]?[0-9]*"
                             max={20}
                             name="rate"
-                            value={formValues.rate}
+                            value={(e) => {
+                                let val = e.target.value.replace(',', '.').replace(/[^0-9.]/g, '');
+
+                                const parts = val.split('.');
+                                if (parts.length > 2) {
+                                    val = parts[0] + '.' + parts.slice(1).join('');
+                                }
+
+                                setFormValues(prev => ({ ...prev, rate: val }));
+                            }
+                            }
                             id="rate"
                             onChange={handleFormInput}
                             className='w-full px-4 text-[18px] leading-[125%] tracking-[0%] text-slate-900 font-bold placeholder-slate-900 appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none cursor-pointer' />
