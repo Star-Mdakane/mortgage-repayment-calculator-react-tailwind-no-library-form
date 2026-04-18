@@ -23,10 +23,10 @@ const Form = () => {
                     <label htmlFor="amount" className='text-[16px] text-[#4E6E7E] text-left leading-[150%] tracking-[0%] font-medium'>Mortgage Amount</label>
                     <div className={`flex border ${formErrors.amount ? 'border-[#D73328]' : 'border-[#6B94A8]'}  rounded-sm`}>
                         <p className={`w-11 px-4 py-3 text-[18px] leading-[125%] tracking-[0%] font-bold ${formErrors.amount ? 'text-white' : 'text-[#4E6E7E]'} ${formErrors.amount ? 'bg-[#D73328]' : 'bg-[#E4F4FD]'} `}>{"\u00A3"}</p>
-                        <input type="number" name="amount" id="amount" value={formValues.amount} onChange={handleFormInput} className='w-full px-4 text-[18px] leading-[125%] tracking-[0%] text-slate-900 font-bold placeholder-slate-900 appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none cursor-pointer' />
+                        <input type="text" inputMode="decimal" pattern="[0-9]*" name="amount" id="amount" value={formValues.amount} onChange={handleFormInput} className='w-full px-4 text-[18px] leading-[125%] tracking-[0%] text-slate-900 font-bold placeholder-slate-900 appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none cursor-pointer' />
                     </div>
                     {formErrors.amount && (
-                        <p className="text-[#D73328] text-[14px] leading-[150%] font-medium">
+                        <p role="alert" className="text-[#D73328] text-[14px] leading-[150%] font-medium">
 
                             {formErrors.amount}
                         </p>
@@ -35,11 +35,11 @@ const Form = () => {
                 <div className='col-span-2 md:col-span-1 flex flex-col gap-3'>
                     <label htmlFor="term" className='text-[16px] text-[#4E6E7E] text-left leading-[150%] tracking-[0%] font-medium'>Mortgage Term</label>
                     <div className={`flex border ${formErrors.amount ? 'border-[#D73328]' : 'border-[#6B94A8]'}  rounded-sm`}>
-                        <input type="number" max={30} name="term" id="term" value={formValues.term} onChange={handleFormInput} className='w-full px-4 text-[18px] leading-[125%] tracking-[0%] text-slate-900 font-bold placeholder-slate-900 appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none cursor-pointer' />
+                        <input type="text" inputMode="decimal" pattern="[0-9]*" max={30} name="term" id="term" value={formValues.term} onChange={handleFormInput} className='w-full px-4 text-[18px] leading-[125%] tracking-[0%] text-slate-900 font-bold placeholder-slate-900 appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none cursor-pointer' />
                         <p className={`w-20 px-4 py-3 text-[18px] leading-[125%] tracking-[0%] font-bold ${formErrors.amount ? 'text-white' : 'text-[#4E6E7E]'} ${formErrors.amount ? 'bg-[#D73328]' : 'bg-[#E4F4FD]'}`}>years</p>
                     </div>
                     {formErrors.term && (
-                        <p className="text-[#D73328] text-[14px] leading-[150%] font-medium">
+                        <p role="alert" className="text-[#D73328] text-[14px] leading-[150%] font-medium">
 
                             {formErrors.term}
                         </p>
@@ -48,11 +48,11 @@ const Form = () => {
                 <div className='col-span-2 md:col-span-1 flex flex-col gap-3'>
                     <label htmlFor="rate" className='text-[16px] text-[#4E6E7E] text-left leading-[150%] tracking-[0%] font-medium'>Interest Rate</label>
                     <div className={`flex border ${formErrors.amount ? 'border-[#D73328]' : 'border-[#6B94A8]'}  rounded-sm`}>
-                        <input type="number" max={20} name="rate" value={formValues.rate} id="rate" onChange={handleFormInput} className='w-full px-4 text-[18px] leading-[125%] tracking-[0%] text-slate-900 font-bold placeholder-slate-900 appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none cursor-pointer' />
+                        <input type="text" inputMode="decimal" pattern="[0-9]*" max={20} name="rate" value={formValues.rate} id="rate" onChange={handleFormInput} className='w-full px-4 text-[18px] leading-[125%] tracking-[0%] text-slate-900 font-bold placeholder-slate-900 appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none cursor-pointer' />
                         <p className={`w-12.5 px-4 py-3 text-[18px] leading-[125%] tracking-[0%] font-bold ${formErrors.amount ? 'text-white' : 'text-[#4E6E7E]'} ${formErrors.amount ? 'bg-[#D73328]' : 'bg-[#E4F4FD]'}`}>%</p>
                     </div>
                     {formErrors.rate && (
-                        <p className="text-[#D73328] text-[14px] leading-[150%] font-medium">
+                        <p role="alert" className="text-[#D73328] text-[14px] leading-[150%] font-medium">
 
                             {formErrors.rate}
                         </p>
@@ -60,11 +60,12 @@ const Form = () => {
                 </div>
                 <fieldset className='col-span-2 flex flex-col gap-3'>
                     <legend className='text-[16px] text-[#4E6E7E] text-left leading-[150%] tracking-[0%] font-medium mb-3'>Mortgage Type</legend>
-                    <label className='border border-[#6B94A8] rounded-sm px-4 gap-4 h-12 flex items-center cursor-pointer has-checked:bg-[#D8DB2F]/10 has-checked:border-[#D8DB2F] group'>
+                    <label htmlFor="repayment" className='border border-[#6B94A8] rounded-sm px-4 gap-4 h-12 flex items-center cursor-pointer has-checked:bg-[#D8DB2F]/10 has-checked:border-[#D8DB2F] group'>
                         <div className="grid place-items-center w-6 h-6">
                             <input
                                 type="radio"
                                 name="type"
+                                id="repayment"
                                 value="repayment"
                                 checked={formValues.type === 'repayment'}
                                 onChange={handleFormInput}
@@ -76,11 +77,12 @@ const Form = () => {
                             Repayment
                         </span>
                     </label>
-                    <label className='border border-[#6B94A8] rounded-sm px-4 gap-4 h-12 flex items-center cursor-pointer has-checked:bg-[#D8DB2F]/10 has-checked:border-[#D8DB2F] group'>
+                    <label htmlFor="interestOnly" className='border border-[#6B94A8] rounded-sm px-4 gap-4 h-12 flex items-center cursor-pointer has-checked:bg-[#D8DB2F]/10 has-checked:border-[#D8DB2F] group'>
                         <div className="grid place-items-center w-6 h-6">
                             <input
                                 type="radio"
                                 name="type"
+                                id="interestOnly"
                                 value="interestOnly"
                                 checked={formValues.type === 'interestOnly'}
                                 onChange={handleFormInput}
@@ -93,7 +95,7 @@ const Form = () => {
                         </span>
                     </label>
                     {formErrors.type && (
-                        <p className="text-[#D73328] text-[14px] leading-[150%] font-medium">
+                        <p role="alert" className="text-[#D73328] text-[14px] leading-[150%] font-medium">
 
                             {formErrors.type}
                         </p>
