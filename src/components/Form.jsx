@@ -23,7 +23,7 @@ const Form = () => {
                     <label htmlFor="amount" className='text-[16px] text-[#4E6E7E] text-left leading-[150%] tracking-[0%] font-medium'>Mortgage Amount</label>
                     <div className={`flex border ${formErrors.amount ? 'border-[#D73328]' : 'border-[#6B94A8]'}  rounded-sm`}>
                         <p className={`w-11 px-4 py-3 text-[18px] leading-[125%] tracking-[0%] font-bold ${formErrors.amount ? 'text-white' : 'text-[#4E6E7E]'} ${formErrors.amount ? 'bg-[#D73328]' : 'bg-[#E4F4FD]'} `}>{"\u00A3"}</p>
-                        <input type="text" inputMode="decimal" pattern="[0-9]*" name="amount" id="amount" value={formValues.amount} onChange={handleFormInput} className='w-full px-4 text-[18px] leading-[125%] tracking-[0%] text-slate-900 font-bold placeholder-slate-900 appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none cursor-pointer' />
+                        <input type="text" inputMode="decimal" pattern="[0-9]*[.]?[0-9]*" name="amount" id="amount" value={formValues.amount} onChange={handleFormInput} className='w-full px-4 text-[18px] leading-[125%] tracking-[0%] text-slate-900 font-bold placeholder-slate-900 appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none cursor-pointer' />
                     </div>
                     {formErrors.amount && (
                         <p role="alert" className="text-[#D73328] text-[14px] leading-[150%] font-medium">
@@ -35,7 +35,7 @@ const Form = () => {
                 <div className='col-span-2 md:col-span-1 flex flex-col gap-3'>
                     <label htmlFor="term" className='text-[16px] text-[#4E6E7E] text-left leading-[150%] tracking-[0%] font-medium'>Mortgage Term</label>
                     <div className={`flex border ${formErrors.amount ? 'border-[#D73328]' : 'border-[#6B94A8]'}  rounded-sm`}>
-                        <input type="text" inputMode="decimal" pattern="[0-9]*" max={30} name="term" id="term" value={formValues.term} onChange={handleFormInput} className='w-full px-4 text-[18px] leading-[125%] tracking-[0%] text-slate-900 font-bold placeholder-slate-900 appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none cursor-pointer' />
+                        <input type="text" inputMode="decimal" pattern="[0-9]*[.]?[0-9]*" max={30} name="term" id="term" value={formValues.term} onChange={handleFormInput} className='w-full px-4 text-[18px] leading-[125%] tracking-[0%] text-slate-900 font-bold placeholder-slate-900 appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none cursor-pointer' />
                         <p className={`w-20 px-4 py-3 text-[18px] leading-[125%] tracking-[0%] font-bold ${formErrors.amount ? 'text-white' : 'text-[#4E6E7E]'} ${formErrors.amount ? 'bg-[#D73328]' : 'bg-[#E4F4FD]'}`}>years</p>
                     </div>
                     {formErrors.term && (
@@ -50,23 +50,12 @@ const Form = () => {
                     <div className={`flex border ${formErrors.amount ? 'border-[#D73328]' : 'border-[#6B94A8]'}  rounded-sm`}>
                         <input type="text"
                             inputMode="decimal"
-                            pattern="[0-9]*"
+                            pattern="[0-9]*[.]?[0-9]*"
                             max={20}
                             name="rate"
                             value={formValues.rate}
                             id="rate"
-                            onChange={(e) => {
-                                let val = e.target.value.replace(',', '.').replace(/[^0-9.]/g, '');
-
-                                const parts = val.split('.');
-                                if (parts.length > 2) {
-                                    val = parts[0] + '.' + parts.slice(1).join('');
-                                }
-
-                                setFormValues(prev => ({ ...prev, rate: val }));
-                            }
-                            }
-
+                            onChange={handleFormInput}
                             className='w-full px-4 text-[18px] leading-[125%] tracking-[0%] text-slate-900 font-bold placeholder-slate-900 appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none cursor-pointer' />
                         <p className={`w-12.5 px-4 py-3 text-[18px] leading-[125%] tracking-[0%] font-bold ${formErrors.amount ? 'text-white' : 'text-[#4E6E7E]'} ${formErrors.amount ? 'bg-[#D73328]' : 'bg-[#E4F4FD]'}`}>%</p>
                     </div>
