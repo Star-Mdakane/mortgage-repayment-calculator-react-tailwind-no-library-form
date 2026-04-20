@@ -40,7 +40,7 @@ const GlobalProvider = ({ children }) => {
         const errors = validate(formValues);
         setFormErrors(errors);
 
-        if (Object.keys(errors).length == 0) {
+        if (Object.keys(errors).length === 0) {
             const res = calculateMortgage(formValues);
             setResults(res);
             setShowResults(true);
