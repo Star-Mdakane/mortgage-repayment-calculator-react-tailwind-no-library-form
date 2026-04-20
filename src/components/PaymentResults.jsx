@@ -5,6 +5,10 @@ import { GlobalContext } from '../contexts/GlobalContext';
 const PaymentResults = () => {
 
     const { results, formValues } = useContext(GlobalContext);
+    
+    if (!results) {
+  return <div aria-live="polite">No results yet — submit the form.</div>;
+}
 
     const { monthly, total, totalInterest } = results;
 
