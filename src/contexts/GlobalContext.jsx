@@ -55,7 +55,7 @@ const GlobalProvider = ({ children }) => {
         const rate = Number(values.rate) / 100 / 12;
         const months = Number(values.term) * 12;
 
-        if (!amount || !term || !rate) {
+        if (!Number.isFinite(amount) || !Number.isFinite(term) || !Number.isFinite(rate)) {
             return { monthly: 0, total: 0 };
         }
 
