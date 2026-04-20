@@ -8,12 +8,10 @@ const PaymentResults = () => {
 
     const { monthly, total, totalInterest } = results;
 
-    console.log(formValues.type);
-
     return (
         <div className='flex flex-col gap-6 md:gap-10'>
             <div className='flex flex-col gap-4'>
-                <h1 className="text-[24px] leading-[125%] font-bold text-white">Your Results</h1>
+                <h2 className="text-[24px] leading-[125%] font-bold text-white">Your Results</h2>
                 <p className="text-[16px] leading-[150%] font-medium text-[#9ABED5]">Your results are shown below based on the information you provided. To adjust the results, edit the form and click “calculate repayments” again.</p>
             </div>
             <div className='flex flex-col gap-4 px-4 py-6 md:p-8 md:gap-8 rounded-lg bg-[#0E2431] border-t-4 border-[#D8DB2F]'>
